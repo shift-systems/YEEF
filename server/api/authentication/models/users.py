@@ -1,9 +1,13 @@
-from django.contrib.auth.models import (
-    AbstractBaseUser, BaseUserManager, PermissionsMixin
-)
+import uuid
+from datetime import datetime, timedelta
+
+import jwt
+from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
+                                        PermissionsMixin)
 from django.db import models
 from django.utils import timezone
-import uuid
+from django.conf import settings
+from api.utils.id_generatory import id_gen, ID_LENGTH
 
 
 class UserManager(BaseUserManager):
@@ -57,7 +61,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     """
     User model
     """
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    id = models.CharField(
+        max_length=ID_LENGTH, primary_key=True, default=id_gen, editable=False
+    )
     password = models.CharField(max_length=100)
     mobile_number = models.CharField(max_length=100, null=True, unique=True)
     username = models.CharField(
@@ -89,6 +96,21 @@ class User(AbstractBaseUser, PermissionsMixin):
         Returns a string representation of this `User`
         """
         return self.email
+
+    @property
+    def token(self):
+        """
+        Generate and return  a jwt token. The user's unique id and username
+        are the user details encode within the user token.
+        """
+        expire_date = datetime.now() + timedelta(days=0, hours=24)
+        token = jwt.encode({
+            'id': str(self.id),
+            'email': self.email,
+            'exp': expire_date,
+        }, settings.SECRET_KEY, algorithm="HS256"
+        )
+        return token.decode('utf-8')
 
     def delete(self):
         self.deleted_at = timezone.now()
