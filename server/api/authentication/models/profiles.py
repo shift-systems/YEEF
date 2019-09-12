@@ -21,12 +21,9 @@ class Role(models.Model):
     def __str__(self):
         return self.name
 
-    def __str__(self):
-        return self.name
-
 
 class Profile(BaseModel):
-<<<<<<< HEAD
+
     id = models.CharField(
         max_length=ID_LENGTH, primary_key=True, default=id_gen, editable=False
     )
@@ -38,14 +35,3 @@ class Profile(BaseModel):
 
     def __str__(self):
         return f'< {str(self.user)}:{str(self.role.name)}>'
-=======
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.OneToOneField(
-        User, related_name='person', on_delete=models.CASCADE)
-    bio = models.TextField()
-    role = models.ManyToManyField(Role)
-    avatar = models.URLField()
-
-    def __str__(self):
-        return f'< {str(self.user)}:{str(self.role)}>'
->>>>>>> athentication

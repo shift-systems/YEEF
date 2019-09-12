@@ -21,8 +21,8 @@ class BaseModel(models.Model):
     deleted_at = models.DateTimeField(blank=True, null=True)
     deleted_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
-    objects = BaseManager()
-    all_objects = BaseManager(alive_only=False)
+    objects = BaseManager(alive_only=False)
+    all_objects = BaseManager()
 
     class Meta:
         abstract = True
