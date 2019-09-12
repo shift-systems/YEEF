@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from .authentication.models import User
+from .authentication.models.users import User
 from .manager import BaseManager
 
 
