@@ -3,47 +3,50 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from .models import User
 from .serializers import UserSerializer
+from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from .serializers import UserSerializer
+from rest_framework.response import Response
+from rest_framework import status
+from .renderers import UserJSONRenderer
+from rest_framework.renderers import JSONRenderer
+from .models import User
 
 
-@csrf_exempt
-def user_list(request):
-    """List all users from server"""
-    if request.method == 'GET':
+class RegisterView(APIView):
+    """View to register all users to the system
+    * Requires no authentication
+    * Anyone can register an account
+    """
+    permission_classes = (AllowAny,)
+    serializer_class = UserSerializer
+    renderer_classes = (UserJSONRenderer,)
+
+    def post(self, request, *args, **kwargs):
+        user = request.data.get('user')
+
+        serializer = self.serializer_class(data=user)
+
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def get(self, request, *args, **kwargs):
+
+        self.permission_classes = (IsAuthenticated,)
         users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return JsonResponse(serializer.data, safe=False)
-
-    if request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = UserSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+        serializer = self.serializer_class(users, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-@csrf_exempt
-def user_detail(request, pk):
+class LoginView(APIView):
+    """View to login a given user
+    * Requires no authentication
     """
-    Retrieve, update or delete a code snippet.
-    """
-    try:
-        user = User.objects.get(pk=pk)
-    except User.DoesNotExist:
-        return HttpResponse(status=404)
+    permission_classes = (AllowAny,)
+    serializer_class = UserSerializer
+    renderer_classes = (UserJSONRenderer,)
 
-    if request.method == 'GET':
-        serializer = UserSerializer(user)
-        return JsonResponse(serializer.data)
-
-    if request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = UserSerializer(user, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
-
-    if request.method == 'DELETE':
-        user.delete()
-        return HttpResponse(status=204)
+    def get(self, request, *args, **kwargs):
+        pass
