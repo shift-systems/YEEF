@@ -28,3 +28,5 @@ class Profile(BaseModel):
 
     def __str__(self):
         return f'< {str(self.user)}:{str(self.role)}>'
+
+  

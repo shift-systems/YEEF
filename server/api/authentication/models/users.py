@@ -70,6 +70,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     deleted_at = models.DateTimeField(blank=True, null=True)
     deleted_by = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
 
+    class Meta:
+        app_label = 'authentication'
+
     """
     More fields required by Django when specifying a custom user model.
     The `USERNAME_FIELD` property tells us which field we will use to log in.
