@@ -1,5 +1,5 @@
 # Python CircleCI 2.0 configuration file
-#
+# Name: Rockerfeller
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
 version: 2
@@ -48,7 +48,7 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            python manage.py test
+            python server/manage.py test
 
       - store_artifacts:
           path: test-reports
