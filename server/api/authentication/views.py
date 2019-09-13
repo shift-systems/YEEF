@@ -32,12 +32,6 @@ class RegisterView(APIView):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def get(self, request, *args, **kwargs):
-
-        self.permission_classes = (IsAuthenticated,)
-        users = User.objects.all()
-        serializer = self.serializer_class(users, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class LoginView(APIView):
