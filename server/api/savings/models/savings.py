@@ -23,12 +23,12 @@ class Savings(BaseModel):
     id = models.CharField(
         max_length=ID_LENGTH, primary_key=True, default=id_gen, editable=False
     )
-    saver = models.ForeignKey(User, on_delete=models.SET_NULL)
-    amount = models.DecimalField(editable=False, decimal_places=2)
-    transaction_id = models.PositiveIntegerField()
-    transaction_ref_id = models.CharField(max_length=40)
+    saver = models.ForeignKey(User,related_name="saver", on_delete=models.SET_NULL,null=True)
+    amount = models.DecimalField(editable=False, max_digits =15, decimal_places=2)
+    transaction_id = models.PositiveIntegerField(null=True)
+    transaction_ref_id = models.CharField(max_length=40,null=True)
     status = models.CharField(choices=choices, max_length=2, default=PENDING)
-    financial_transaction_id = models.PositiveIntegerField()
+    financial_transaction_id = models.PositiveIntegerField(null=True)
 
     objects = BaseManager()
 
