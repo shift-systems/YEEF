@@ -10,6 +10,7 @@ from rest_framework import status
 from .renderers import UserJSONRenderer, ProfileJSONRenderer
 from rest_framework.renderers import JSONRenderer
 from .models import User
+from rest_framework.parsers import MultiPartParser, FormParser
 
 
 class RegisterView(APIView):
@@ -57,6 +58,7 @@ class ProfileView(APIView):
 
     def get(self, request, *args, **kwargs):
         """Get a profile for a loggedin user"""
+
         user = request.user
         if user.is_authenticated:
             profile = Profile.objects.get(user=user)
@@ -64,7 +66,8 @@ class ProfileView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, *args, **kwargs):
-        """Update profile for a loggedin user"""
+        """Update profile for a logged in user"""
+
         profile = request.data.get('profile')
         user = profile.pop('user', None)
         serializer = self.serializer_class(

@@ -1,1 +1,1 @@
-from .savings import *
+from .savings import Savings

@@ -41,7 +41,7 @@ class ProfileSerialiser(serializers.ModelSerializer):
             setattr(user, key, value)
 
         for (key, value) in validated_data.items():
-            if key in ('role',):
+            if key in ('role', 'avator'):
                 continue
             setattr(profile_intance, key, value)
         if password is not None:
