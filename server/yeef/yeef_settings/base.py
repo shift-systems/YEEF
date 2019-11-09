@@ -21,13 +21,6 @@ BASE_DIR = os.path.dirname(
         os.path.dirname(os.path.abspath(__file__))
     )
 )
-
-# BASE_DIR = os.path.dirname(
-
-#     os.path.dirname(os.path.abspath(__file__))
-
-# )
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -51,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api.authentication',
+    'api.savings',
 
 ]
 
@@ -184,3 +178,5 @@ EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_USE_TLS = os.getenv('TLS', True)
 
 # Email configs
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
+MEDIA_URL = '/media/'

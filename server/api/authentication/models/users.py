@@ -49,7 +49,7 @@ class UserManager(BaseUserManager):
 
         user = self.create_user(
             email=email, username=username, password=password,
-            mobile_number='256788088891')
+            mobile_number='256788088831')
         user.is_superuser = True
         user.is_staff = True
         user.save(using=self._db)

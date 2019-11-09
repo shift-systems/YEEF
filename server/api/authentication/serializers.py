@@ -41,24 +41,13 @@ class ProfileSerialiser(serializers.ModelSerializer):
             setattr(user, key, value)
 
         for (key, value) in validated_data.items():
-            if key in ('role',):
-                continue
-            setattr(profile_instance, key, value)
+            continue
+            setattr(profile_intance, key, value)
         if password is not None:
             user.set_password(password)
         user.save()
-        profile_instance.save()
-        return profile_instance
-
-
-class LoginSerializer(serializers.Serializer):
-    email = serializers.CharField(max_length=255)
-    password = serializers.CharField(max_length=128, write_only=True)
-    token = serializers.CharField(max_length=255, read_only=True)
-
-    def validate(self, data):
-        email = data.get('email', None)
-        password = data.get('password', None)
+        profile_intance.save()
+        return profile_intance
 
         if email is None:
             raise serializers.ValidationError(

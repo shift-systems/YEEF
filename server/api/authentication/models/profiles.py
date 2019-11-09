@@ -21,11 +21,9 @@ class Role(models.Model):
     def __str__(self):
         return self.name
 
-    def __str__(self):
-        return self.name
-
 
 class Profile(BaseModel):
+
     id = models.CharField(
         max_length=ID_LENGTH, primary_key=True, default=id_gen, editable=False
     )

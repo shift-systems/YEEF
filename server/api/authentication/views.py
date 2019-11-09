@@ -10,6 +10,7 @@ from rest_framework import status
 from .renderers import UserJSONRenderer, ProfileJSONRenderer
 from rest_framework.renderers import JSONRenderer
 from .models import User
+from rest_framework.parsers import MultiPartParser, FormParser
 
 
 class RegisterView(APIView):
@@ -48,7 +49,7 @@ class LoginView(APIView):
 
 
 class ProfileView(APIView):
-    """View to handle profiles
+    """View to handle proifles
     * Requires no authentication
     """
     permission_classes = (IsAuthenticated,)
