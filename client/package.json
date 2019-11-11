@@ -1,0 +1,29 @@
+{
+  "name": "yeef",
+  "version": "1.0.0",
+  "description": "savings ",
+  "main": "index.js",
+  "author": "kafuuma henry",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack ",
+    "dev-server": "webpack-dev-server"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "live-server": "^1.2.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}
