@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2"
+  },
+  "dependencies": {
+    "react-redux": "^7.1.3"
+  }
+}

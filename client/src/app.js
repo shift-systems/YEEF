@@ -1,6 +1,12 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import { Provider } from 'react-redux';
 import AppRouter from './routers/AppRouter';
-import './styles/main.scss';
+import store from './store';
 
-ReactDom.render(<AppRouter />, document.getElementById('app'));
+const App = () => (
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
+);
+
+export default App;
