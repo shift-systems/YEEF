@@ -22,6 +22,7 @@ class SavingsView(APIView):
     def post(self, request, *args, **kwargs):
 
         saver = request.user
+        print(request.user)
         saving = request.data.get('savings')
         payment_details = {
             # "mobile": '46733123451',
@@ -43,6 +44,7 @@ class SavingsView(APIView):
         savings_info = process_response(savings_resp, payment_details)
         data = savings_info
         if 'error' not in savings_info.keys():
+            print(savings_info)
             serializer = self.serializer_class(data=savings_info)
             serializer.is_valid(raise_exception=True)
 
@@ -55,10 +57,9 @@ class SavingsView(APIView):
         saver = request.user
         savings = Savings.objects.filter(saver=saver)
         serializer = self.serializer_class(savings, many=True)
-        total_savings = Savings().get_user_total_savings(saver=saver)
-        data = serializer.data + [{'total_savings': float(total_savings)}]
-
-        return Response(data=data, status=status.HTTP_200_OK)
+        # total_savings = Savings().get_user_total_savings(saver=saver)
+        # data = serializer.data + [{'total_savings': float(total_savings)}]
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class AllSavingsView(APIView):

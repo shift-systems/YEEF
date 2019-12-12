@@ -1,8 +1,13 @@
 import actionTypes from './actionTypes';
 
-export const login = uid => ({
-  type: 'LOGIN',
-  uid
+export const loginSuccess = response => ({
+  type: actionTypes.LOGIN_SUCCESS,
+  payload: response.user
+});
+
+export const loginFail = response => ({
+  type: actionTypes.LOGIN_FAIL,
+  payload: response.user
 });
 
 export const logout = () => ({
@@ -11,8 +16,15 @@ export const logout = () => ({
 
 export const signupSuccess = response => ({
   type: actionTypes.SIGNUP_SUCCESS,
-  payload: response
+  payload: response.user
 });
+
+export const signupFail = response => {
+  return {
+    type: actionTypes.SIGNUP_FAIL,
+    payload: response.user
+  };
+};
 
 export const startSignup = data => {
   return dispatch => {
@@ -27,19 +39,16 @@ export const startSignup = data => {
       .then(res => res.json())
       .then(response => {
         if (response.user.id) {
-          dispatch(signupSuccess(response.user));
+          dispatch(signupSuccess(response));
         } else {
-          dispatch(signupFail(response.user));
+          dispatch(signupFail(response));
         }
+      })
+      .catch(err => {
+        console.log(err, 'This error is from auth action');
       });
   };
 };
-
-// export const startLogin = () => {
-//   return () => {
-//     return firebase.auth().signInWithPopup(googleAuthProvider);
-//   };
-// };
 
 export const startLogin = data => {
   return dispatch => {
@@ -53,11 +62,15 @@ export const startLogin = data => {
     })
       .then(res => res.json())
       .then(response => {
-        if (response.user.email) {
-          dispatch(signupSuccess(response.user));
+        console.log(response.status, 'check status code');
+        if (response.user.token) {
+          dispatch(loginSuccess(response));
         } else {
-          dispatch(signupFail(response.user));
+          dispatch(loginFail(response));
         }
+      })
+      .catch(error => {
+        console.log(error, 'From auth action');
       });
   };
 };

@@ -1,18 +1,18 @@
 import moment from 'moment';
 
-// Get visible expenses
+// Get visible savings
 
-export default (expenses, { text, sortBy, startDate, endDate }) => {
-  return expenses
-    .filter(expense => {
-      const createdAtMoment = moment(expense.createdAt);
+export default (savings, { text, sortBy, startDate, endDate }) => {
+  return savings
+    .filter(saving => {
+      const savedOnMoment = moment(saving.saveOn);
       const startDateMatch = startDate
-        ? startDate.isSameOrBefore(createdAtMoment, 'day')
+        ? startDate.isSameOrBefore(savedOnMoment, 'day')
         : true;
       const endDateMatch = endDate
-        ? endDate.isSameOrAfter(createdAtMoment, 'day')
+        ? endDate.isSameOrAfter(savedOnMoment, 'day')
         : true;
-      const textMatch = expense.description
+      const textMatch = saving.saver.email
         .toLowerCase()
         .includes(text.toLowerCase());
 
@@ -20,7 +20,7 @@ export default (expenses, { text, sortBy, startDate, endDate }) => {
     })
     .sort((a, b) => {
       if (sortBy === 'date') {
-        return a.createdAt < b.createdAt ? 1 : -1;
+        return a.saveOn < b.saveOn ? 1 : -1;
       } else if (sortBy === 'amount') {
         return a.amount < b.amount ? 1 : -1;
       }

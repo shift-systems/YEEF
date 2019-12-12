@@ -1,26 +1,21 @@
 // Expenses Reducer
 
-const expensesReducerDefaultState = [];
+const savings = [];
+const error = '';
 
-export default (state = expensesReducerDefaultState, action) => {
+export const getExpenseSuccess = (state = savings, action) => {
   switch (action.type) {
-    case 'ADD_EXPENSE':
+    case 'GET_SAVINGS_SUCCESS':
       return [...state, action.expense];
-    case 'REMOVE_EXPENSE':
-      return state.filter(({ id }) => id !== action.id);
-    case 'EDIT_EXPENSE':
-      return state.map(expense => {
-        if (expense.id === action.id) {
-          return {
-            ...expense,
-            ...action.updates
-          };
-        } else {
-          return expense;
-        }
-      });
-    case 'SET_EXPENSES':
-      return action.expenses;
+    default:
+      return state;
+  }
+};
+
+export const getExpenseFail = (state = error, action) => {
+  switch (action.type) {
+    case 'GET_SAVINGS_FAIL':
+      return [...state, action.expense];
     default:
       return state;
   }

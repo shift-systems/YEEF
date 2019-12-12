@@ -2,18 +2,21 @@
 
 set -e
 set -o pipefail # if any code doesn't return 0, exit the script
-
-if [ $NODE_ENV = "production" ]; then
+cd client
+if [[ $NODE_ENV = "production" ]]; then
   yarn start
 else
-  npm run start:dev
+  yarn run dev-server
 fi
 
 
 
+# function start_client() {
+#   if [[ $NODE_ENV = "production" ]]; then
+#     yarn start
+#   else
+#     yarn run dev-server
+#   fi
+# }
 
-
-function start_client() {
-  cd client
-  yarn start:dev &
-}
+# start_client

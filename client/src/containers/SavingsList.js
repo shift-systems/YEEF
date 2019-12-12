@@ -1,33 +1,53 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SavingsListItem from '../components/SavingsListItem';
 import selectExpenses from '../selectors/expenses';
+import { startGetSavings } from '../actions/savings';
 
-export const SavingList = props => (
-  <div className="content-container">
-    <div className="list-header">
-      <div className="show-for-mobile">Savings</div>
-      <div className="show-for-desktop">Saving</div>
-      <div className="show-for-desktop">Amount</div>
-    </div>
-    <div className="list-body">
-      {props.expenses.length === 0 ? (
-        <div className="list-item list-item--message">
-          <span>No expenses</span>
+class SavingList extends Component {
+  constructor(props) {
+    super(props);
+
+    this.sate = {};
+  }
+
+  componentDidMount(props) {
+    this.props.startGetSavings();
+  }
+
+  render() {
+    const props = this.props;
+    return (
+      <div className="content-container">
+        <div className="list-header">
+          <div className="show-for-mobile">Savings</div>
+          <div className="show-for-desktop">Saving</div>
+          <div className="show-for-desktop">Amount</div>
         </div>
-      ) : (
-        props.expenses.map(expense => {
-          return <SavingsListItem key={expense.id} {...expense} />;
-        })
-      )}
-    </div>
-  </div>
-);
+        <div className="list-body">
+          {props.savings.length === 0 ? (
+            <div className="list-item list-item--message">
+              <span>You haven't made savings yet</span>
+            </div>
+          ) : (
+            props.savings.map(saving => {
+              return <SavingsListItem key={saving.id} {...saving} />;
+            })
+          )}
+        </div>
+      </div>
+    );
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  startGetSavings: path => dispatch(startGetSavings(path))
+});
 
 const mapStateToProps = state => {
   return {
-    expenses: selectExpenses(state.expenses, state.filters)
+    savings: selectExpenses(state.savings, state.filters)
   };
 };
 
-export default connect(mapStateToProps)(SavingList);
+export default connect(mapStateToProps, mapDispatchToProps)(SavingList);

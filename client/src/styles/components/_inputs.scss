@@ -8,9 +8,25 @@
 
 .select {
   @extend .text-input;
+  font-family: inherit;
 }
 
 .textarea {
   @extend .text-input;
   height: 10rem;
+}
+
+.form-saving {
+  display: flex;
+  justify-content: space-between;
+  min-width: 100%;
+
+  &__picker {
+    width: 50px;
+  }
+  &__select {
+    @extend .text-input;
+    font-size: 1.5rem;
+    // width: 50%;
+  }
 }
