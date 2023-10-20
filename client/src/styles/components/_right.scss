@@ -1,0 +1,19 @@
+#right {
+    flex: 1;
+    display: block;
+}
+
+.banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    background-image: url(/id/content/img/login-bg.jpg);
+    background-position: 50%;
+    background-size: cover;
+}
+
+.advert-banner {
+    z-index: 0;
+}

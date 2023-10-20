@@ -1,7 +1,42 @@
 @import './base/settings';
 @import './base/base';
 @import './components/navbar';
+@import './components/left.scss';
+@import './components/right.scss';
+@import './components/footer.scss';
 
 * {
-  color: $theme-color;
+    color: $theme-color;
+}
+
+body {
+    font-family: Gotham SSm A, Gotham SSm B, sans-serif;
+    margin: 0;
+    background-color: #181818;
+    color: #fff;
+}
+
+#container {
+    display: flex;
+    flex-direction: row;
+}
+
+.button {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: stretch;
+    padding: 8px 0px;
+    border: 0;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 500;
+    text-align: center;
+    color: #fff;
+    background: #f96816;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: all .3s;
+    vertical-align: middle;
 }

@@ -1,0 +1,125 @@
+#left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.signin,
+.signin .wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.signin .wrapper {
+    flex-direction: column;
+}
+
+.signin {
+    flex-direction: column;
+    flex: auto;
+    justify-content: center;
+    padding-bottom: 12px;
+}
+
+.spacer {
+    flex: 2;
+    min-height: 48px;
+}
+
+.logo {
+    margin-bottom: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.links,
+.signInForm {
+    width: 80%;
+}
+
+.signInForm input {
+    margin-bottom: 24px;
+}
+
+
+.text-input__field {
+    position: relative;
+    min-width: 192px;
+    width: 100%;
+    border-radius: 2px;
+    background: #f2f2f2;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 400;
+    color: #555;
+    padding: 8px 0px;
+    border: none;
+}
+
+.signInForm .button {
+    width: 100%;
+    margin-bottom: 48px;
+}
+
+.button--size-medium {
+    font-size: 14px;
+    line-height: 24px;
+}
+
+
+
+.button--appearance-stroke {
+    border: 1px solid #f96816;
+    background: none;
+}
+
+
+
+.links a {
+    display: block;
+    color: #fff;
+    font-size: 12px;
+    margin-bottom: 16px;
+}
+
+.links {
+    text-align: center;
+}
+
+.signInForm label {
+    color: #cccc;
+}
+
+.text-input__label {
+    color: #f2f2f2;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 500;
+    padding-bottom: 8px;
+}
+
+#create-account-link,
+.or {
+    margin-bottom: 24px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+}
+
+.bar {
+    flex: auto;
+    border: none;
+    height: 1px;
+    background-color: #aaa;
+}
+
+.text-input__field--appearance-subtle {
+    color: #ccc;
+    background: #181818;
+    border: 1px solid #555;
+}
